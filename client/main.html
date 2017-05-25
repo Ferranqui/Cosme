@@ -1,0 +1,36 @@
+<head>
+  <title>Cosme Gallery</title>
+  <link rel="icon" type="image/ico" href="/galeria/cosme.ico">
+</head>
+
+<body background="/galeria/Fondo2.jpg">
+
+  <h1>Cosme Gallery</h1>
+
+  {{> uploadForm}}
+  {{> uploadedFiles}}
+</body>
+
+<template name="uploadForm">
+  {{#with currentUpload}}
+    Uploading <b>{{file.name}}</b>:
+    <span id="progress">{{progress.get}}%</span>
+  {{else}}
+    <input id="fileInput" type="file" />
+    <p><small>Sube imagenes en <code>jpeg</code> o <code>png</code>, puedes subir imagenes hasta 10 MB</small></p>
+  {{/with}}
+</template>
+
+<template name="uploadedFiles">
+  {{#if uploadedFiles.count}}
+    <ul>
+      {{#each file in uploadedFiles.each}}
+        <li>
+          <img src="{{file.link}}" height="300px">{{file.link}}
+        </li>
+      {{/each}}
+    </ul>
+  {{else}}
+    <div>No hay ninguna foto :(</div>
+  {{/if}}
+</template>
